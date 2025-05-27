@@ -1,4 +1,6 @@
-namespace Paint;
+using StudentsPaint.Instruments;
+
+namespace StudentsPaint;
 
 public partial class MainForm : Form
 {
@@ -45,7 +47,15 @@ public partial class MainForm : Form
     {
         _instrument = new PencilInstrument(
             _picture,
-            new Pen(Color.Black), 5
+            new Pen(Color.Black)
+        );
+    }
+    private void toolStripButton1_Click(object sender, EventArgs e)
+    {
+        if (_picture.Image == null)
+            return;
+        _instrument = new SquareInstrument(
+            _picture, new Pen(_colorDialog.Color)
         );
     }
 
@@ -62,5 +72,15 @@ public partial class MainForm : Form
     private void _picture_MouseUp(object sender, MouseEventArgs e)
     {
         _instrument?.OnMouseUp(sender, e);
+    }
+
+    private void OnColorChoosen(object sender, EventArgs e)
+    {
+        _colorDialog.ShowDialog();
+        _colorButton.BackColor = _colorDialog.Color;
+        if (_instrument == null)
+            return;
+
+        _instrument.Pen.Color = _colorDialog.Color;
     }
 }

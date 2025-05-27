@@ -1,7 +1,7 @@
-﻿namespace Paint;
+﻿namespace StudentsPaint.Instruments;
 
 public class PencilInstrument(
-    PictureBox pictureBox, Pen pen, int size)
+    PictureBox pictureBox, Pen pen)
     : IInstrument
 {
     private bool _isDrawing = false;
@@ -27,21 +27,15 @@ public class PencilInstrument(
             !_lastPoint.HasValue
         )
             return;
-        Image image = new Bitmap(
-            pictureBox.Image.Width,
-            pictureBox.Image.Height
-        );
-        using Graphics graphics = Graphics.FromImage(
-            image
-        );
-        graphics.DrawImage(pictureBox.Image, 0, 0);
-        graphics.DrawLine(
-            Pen, 
-            _lastPoint.Value,
-            e.Location
-        );
-        _lastPoint = e.Location;
+        Image image = pictureBox.Image.GetRedrawedBy(graphics => {
+            graphics.DrawLine(
+                Pen,
+                _lastPoint.Value,
+                e.Location
+            );
+        });
         pictureBox.Image.Dispose();
         pictureBox.Image = image;
+        _lastPoint = e.Location;
     }
 }

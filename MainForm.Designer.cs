@@ -1,4 +1,4 @@
-﻿namespace Paint
+﻿namespace StudentsPaint
 {
     partial class MainForm
     {
@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             _toolStrip = new ToolStrip();
             _pencilButton = new ToolStripButton();
             toolStripButton1 = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            _colorButton = new ToolStripButton();
             _menuStrip = new MenuStrip();
             _fileToolStripMenuItem = new ToolStripMenuItem();
             _buttonCreate = new ToolStripMenuItem();
@@ -39,6 +40,7 @@
             _coordsLabel = new ToolStripStatusLabel();
             _pictureContainer = new Panel();
             _picture = new PictureBox();
+            _colorDialog = new ColorDialog();
             _toolStrip.SuspendLayout();
             _menuStrip.SuspendLayout();
             _statusBar.SuspendLayout();
@@ -49,7 +51,7 @@
             // _toolStrip
             // 
             _toolStrip.BackColor = SystemColors.Control;
-            _toolStrip.Items.AddRange(new ToolStripItem[] { _pencilButton, toolStripButton1 });
+            _toolStrip.Items.AddRange(new ToolStripItem[] { _pencilButton, toolStripButton1, toolStripSeparator1, _colorButton });
             _toolStrip.Location = new Point(0, 24);
             _toolStrip.Name = "_toolStrip";
             _toolStrip.Size = new Size(800, 25);
@@ -69,11 +71,27 @@
             // toolStripButton1
             // 
             toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.Image = Properties.Resources.square;
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.Size = new Size(23, 22);
             toolStripButton1.Text = "toolStripButton1";
+            toolStripButton1.Click += toolStripButton1_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 25);
+            // 
+            // _colorButton
+            // 
+            _colorButton.BackColor = Color.Black;
+            _colorButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            _colorButton.ImageTransparentColor = Color.Magenta;
+            _colorButton.Name = "_colorButton";
+            _colorButton.Size = new Size(23, 22);
+            _colorButton.Text = "toolStripButton2";
+            _colorButton.Click += OnColorChoosen;
             // 
             // _menuStrip
             // 
@@ -169,5 +187,8 @@
         private ToolStripStatusLabel _coordsLabel;
         private ToolStripButton _pencilButton;
         private ToolStripButton toolStripButton1;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton _colorButton;
+        private ColorDialog _colorDialog;
     }
 }
