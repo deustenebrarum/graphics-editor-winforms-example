@@ -33,6 +33,7 @@
             toolStripButton1 = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             _colorButton = new ToolStripButton();
+            _sizeTextBox = new ToolStripTextBox();
             _menuStrip = new MenuStrip();
             _fileToolStripMenuItem = new ToolStripMenuItem();
             _buttonCreate = new ToolStripMenuItem();
@@ -51,7 +52,7 @@
             // _toolStrip
             // 
             _toolStrip.BackColor = SystemColors.Control;
-            _toolStrip.Items.AddRange(new ToolStripItem[] { _pencilButton, toolStripButton1, toolStripSeparator1, _colorButton });
+            _toolStrip.Items.AddRange(new ToolStripItem[] { _pencilButton, toolStripButton1, toolStripSeparator1, _colorButton, _sizeTextBox });
             _toolStrip.Location = new Point(0, 24);
             _toolStrip.Name = "_toolStrip";
             _toolStrip.Size = new Size(800, 25);
@@ -88,10 +89,24 @@
             _colorButton.BackColor = Color.Black;
             _colorButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             _colorButton.ImageTransparentColor = Color.Magenta;
+            _colorButton.Margin = new Padding(5, 1, 0, 2);
             _colorButton.Name = "_colorButton";
             _colorButton.Size = new Size(23, 22);
             _colorButton.Text = "toolStripButton2";
             _colorButton.Click += OnColorChoosen;
+            // 
+            // _sizeTextBox
+            // 
+            _sizeTextBox.BorderStyle = BorderStyle.FixedSingle;
+            _sizeTextBox.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            _sizeTextBox.Margin = new Padding(5, 0, 0, 0);
+            _sizeTextBox.MaxLength = 3;
+            _sizeTextBox.Name = "_sizeTextBox";
+            _sizeTextBox.Size = new Size(45, 25);
+            _sizeTextBox.Text = "1";
+            _sizeTextBox.TextBoxTextAlign = HorizontalAlignment.Right;
+            _sizeTextBox.ToolTipText = "Ширина линии";
+            _sizeTextBox.TextChanged += OnSizeChanged;
             // 
             // _menuStrip
             // 
@@ -190,5 +205,6 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton _colorButton;
         private ColorDialog _colorDialog;
+        private ToolStripTextBox _sizeTextBox;
     }
 }

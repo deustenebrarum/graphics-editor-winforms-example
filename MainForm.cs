@@ -47,7 +47,7 @@ public partial class MainForm : Form
     {
         _instrument = new PencilInstrument(
             _picture,
-            new Pen(Color.Black)
+            new Pen(Color.Black, int.Parse(_sizeTextBox.Text))
         );
     }
     private void toolStripButton1_Click(object sender, EventArgs e)
@@ -55,7 +55,8 @@ public partial class MainForm : Form
         if (_picture.Image == null)
             return;
         _instrument = new SquareInstrument(
-            _picture, new Pen(_colorDialog.Color)
+            _picture,
+            new Pen(_colorDialog.Color, int.Parse(_sizeTextBox.Text))
         );
     }
 
@@ -82,5 +83,29 @@ public partial class MainForm : Form
             return;
 
         _instrument.Pen.Color = _colorDialog.Color;
+    }
+
+    private void SetSize(int size)
+    {
+        if (size < 0 || size > 300)
+        {
+            _sizeTextBox.Text = (_instrument?.Pen.Width ?? 1).ToString();
+            return;
+        }
+
+        _sizeTextBox.Text = size.ToString();
+        if (_instrument != null)
+            _instrument.Pen.Width = size;
+    }
+
+    private void OnSizeChanged(object sender, EventArgs e)
+    {
+        if (string.IsNullOrEmpty(_sizeTextBox.Text) ||
+            !_sizeTextBox.Text.All(char.IsDigit))
+        {
+            _sizeTextBox.Text = (_instrument?.Pen.Width ?? 1).ToString();
+            return;
+        }
+       SetSize(int.Parse(_sizeTextBox.Text));
     }
 }

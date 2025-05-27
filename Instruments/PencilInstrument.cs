@@ -33,6 +33,11 @@ public class PencilInstrument(
                 _lastPoint.Value,
                 e.Location
             );
+            graphics.FillEllipse(
+                Pen.Brush,
+                e.X - pen.Width / 2, e.Y - Pen.Width / 2,
+                pen.Width, pen.Width
+            );
         });
         pictureBox.Image.Dispose();
         pictureBox.Image = image;
